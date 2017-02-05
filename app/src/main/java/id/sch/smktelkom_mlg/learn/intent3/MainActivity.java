@@ -27,6 +27,14 @@ public class MainActivity extends AppCompatActivity {
                 composeSmsMessage("Pesan dari SMK Telkom Malanng");
             }
         });
+
+        //BROWSER
+        findViewById(R.id.imageViewBrowser).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openWebPage("http://www.smktelkom-mlg.sch.id");
+            }
+        });
     }
 
     //Fungsi TELEPON
@@ -41,6 +49,13 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
         intent.putExtra("sms_body", message);
+        if (intent.resolveActivity(getPackageManager()) != null) startActivity(intent);
+    }
+
+    //FUNGSI BROWSER
+    public void openWebPage(String url) {
+        Uri webpage = Uri.parse(url);
+        Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
         if (intent.resolveActivity(getPackageManager()) != null) startActivity(intent);
     }
 }
